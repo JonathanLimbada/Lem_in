@@ -3,6 +3,12 @@ LIB = libft/libft.a
 LI = lem_in
 FLAGS = -Wall -Werror -Wextra
 LISRC = lem_in.c \
+src/validation/ants.c \
+src/validation/comments.c \
+src/validation/end.c \
+src/validation/links.c \
+src/validation/rooms.c \
+src/validation/start.c \
 		$(LIB)
 
 all: $(MAKELIB) $(LI)

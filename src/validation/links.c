@@ -1,6 +1,6 @@
-#include <lem_in.h>
+#include "../../lem_in.h"
 
-char	*ft_strchrnum(const char *s, int c)
+int strchrnum(const char *s, int c)
 {
 	int i;
     int r;
@@ -22,8 +22,8 @@ int isLink(char* str)
 
     if (strchrnum(str, '-') != 1)
         return (0);
-    link = ft_strsplit(str, "-");
-    if (!strequ(link[1], "-"))
+    link = ft_strsplit(str, '-');
+    if (!ft_strequ(link[1], "-"))
         return (0);
     if (!link[0] || link[0][0] == 'L' || link[0][0] == '#')
         return (0);
