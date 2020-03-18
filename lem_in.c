@@ -8,18 +8,40 @@ int main (void)
     int     start;
     int     end;
     int     ants;
+    int     e;
+    int     a;
 
     ants = 0;
     start = 0;
     end = 0;
     room = 0;
     link = 0;
+    e = 0;
+    a = 0;
 	while (get_next_line(0, &file) != 0)
     {
         if (!isValidType(file))
         {
             ft_putendl("oof");
             return (0);
+        }
+        if (start == 1 && e == 0)
+        {
+            if (!isRoom(file))
+            {
+                ft_putendl("start bad");
+                return (0);
+            }
+            e = 1;
+        }
+        if (end == 1 && a == 0)
+        {
+            if (!isRoom(file))
+            {
+                ft_putendl("end bad");
+                return (0);
+            }
+            a = 1;
         }
         if (isRoom(file))
             room++;
