@@ -29,7 +29,7 @@ int main (void)
         {
             if (!isRoom(file))
             {
-                ft_putendl("start bad");
+                ft_putendl("Error: start bad");
                 return (0);
             }
             e = 1;
@@ -38,7 +38,7 @@ int main (void)
         {
             if (!isRoom(file))
             {
-                ft_putendl("end bad");
+                ft_putendl("Error: end bad");
                 return (0);
             }
             a = 1;
@@ -58,27 +58,27 @@ int main (void)
     }
     if (ants != 1)
     {
-        ft_putendl("wrong ant amount");
+        ft_putendl("Error: wrong ant amount");
         return (0);
     }
     if (room <= 2)
     {
-        ft_putendl("wrong room amount");
+        ft_putendl("Error: wrong room amount");
         return (0);
     }
     if (start != 1)
     {
-        ft_putendl("wrong start amount");
+        ft_putendl("Error: wrong start amount");
         return (0);
     }
     if (end != 1)
     {
-        ft_putendl("wrong end ammount");
+        ft_putendl("Error: wrong end ammount");
         return (0);
     }
     if (link < 1)
     {
-        ft_putendl("too few links");
+        ft_putendl("Error: too few links");
         return (0);
     }
     ft_putendl("all good");

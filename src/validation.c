@@ -4,6 +4,8 @@ int     isValidType(char *str)
 {
     if(isAnt(str))
         return (1);
+    if(isRoom(str))
+        return(1);
     if(isCommand(str))
         return (1);
     if(isComment(str))
@@ -11,8 +13,6 @@ int     isValidType(char *str)
     if(isEnd(str))
         return(1);
     if(isLink(str))
-        return(1);
-    if(isRoom(str))
         return(1);
     if(isStart(str))
         return(1);
