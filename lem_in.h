@@ -23,7 +23,7 @@ typedef struct          s_paths
 //validation functions
 
 int     isLink(char* str);
-int     strchrnum(const char *s, int c);
+int     strchrnum(const char *s, char c);
 int     isStart(char* str);
 int     isRoom(char* str);
 int     isEnd(char* str);
@@ -31,6 +31,7 @@ int     isComment(char *str);
 int     isCommand(char *str);
 int     isAnt(char* str);
 int     isNum(char* str);
+int     isValidType(char *str);
 
 
 #endif

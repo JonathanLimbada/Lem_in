@@ -9,6 +9,7 @@ src/validation/end.c \
 src/validation/links.c \
 src/validation/rooms.c \
 src/validation/start.c \
+src/validation.c \
 		$(LIB)
 
 all: $(MAKELIB) $(LI)

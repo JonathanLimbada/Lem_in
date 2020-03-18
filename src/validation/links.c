@@ -1,6 +1,6 @@
 #include "../../lem_in.h"
 
-int strchrnum(const char *s, int c)
+int strchrnum(const char *s, char c)
 {
 	int i;
     int r;
@@ -9,7 +9,7 @@ int strchrnum(const char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char)c)
+		if (s[i] == c)
             r++;
 		i++;
 	}
