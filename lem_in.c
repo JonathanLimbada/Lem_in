@@ -58,22 +58,22 @@ int main (void)
     }
     if (ants != 1)
     {
-        ft_putendl("Error: wrong ant amount");
+        ft_putendl("Error: No ants found");
         return (0);
     }
     if (room <= 2)
     {
-        ft_putendl("Error: wrong room amount");
+        ft_putendl("Error: Not enough rooms");
         return (0);
     }
     if (start != 1)
     {
-        ft_putendl("Error: wrong start amount");
+        ft_putendl("Error: No start command");
         return (0);
     }
     if (end != 1)
     {
-        ft_putendl("Error: wrong end ammount");
+        ft_putendl("Error: wrong end amount");
         return (0);
     }
     if (link < 1)
