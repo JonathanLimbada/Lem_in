@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../libft.h"
-#include <stdio.h>
 
 static int	ft_charcount(char const *s, char c)
 {
@@ -71,5 +70,4 @@ char		**ft_strsplit(char const *s, char c)
 	}
 	p[i] = NULL;
 	return (p);
-	free(p);
 }

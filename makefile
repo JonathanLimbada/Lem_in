@@ -10,6 +10,8 @@ src/validation/links.c \
 src/validation/rooms.c \
 src/validation/start.c \
 src/validation.c \
+src/init.c \
+src/free.c \
 		$(LIB)
 
 all: $(MAKELIB) $(LI)

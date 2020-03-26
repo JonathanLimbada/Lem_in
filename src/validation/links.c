@@ -26,12 +26,15 @@ int isLink(char* str)
     if (!link[0] || link[0][0] == 'L' || link[0][0] == '#')
     {
         ft_putendl("Error: bad link format");
+        freelink(link);
         exit(0);
     }
     if (!link[1] || link[1][0] == 'L' || link[1][0] == '#')
     {
         ft_putendl("Error: bad link format");
+        freelink(link);
         exit(0);
     }
+    freelink(link);
     return (1);
 }

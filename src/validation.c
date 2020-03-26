@@ -1,11 +1,13 @@
 #include "../lem_in.h"
 
+//validate file
+
 int     isValidType(char *str)
 {
     if(isAnt(str))
         return (1);
     if(isRoom(str))
-        return(1);
+        return (1);
     if(isCommand(str))
         return (1);
     if(isComment(str))
@@ -19,6 +21,5 @@ int     isValidType(char *str)
     return(0);
 }
 
-//validate file
-//validate paths
 //validate rooms and links
+//validate paths

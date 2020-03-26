@@ -3,85 +3,65 @@
 int main (void)
 {
     char	*file;
-    int     room;
-    int     link;
-    int     start;
-    int     end;
-    int     ants;
-    int     e;
-    int     a;
+    t_valid *vals;
 
-    ants = 0;
-    start = 0;
-    end = 0;
-    room = 0;
-    link = 0;
-    e = 0;
-    a = 0;
+    vals = (t_valid *)malloc(sizeof(t_valid));
+    init_vals(vals);
+
 	while (get_next_line(0, &file) != 0)
     {
         if (!isValidType(file))
         {
             ft_putendl("oof");
+            freemain(file, vals);
             return (0);
         }
-        if (start == 1 && e == 0)
+        if (vals->start == 1 && vals->e == 0)
         {
             if (!isRoom(file))
             {
                 ft_putendl("Error: start bad");
+                freemain(file, vals);
                 return (0);
             }
-            e = 1;
+            vals->e = 1;
         }
-        if (end == 1 && a == 0)
+        if (vals->end == 1 && vals->a == 0)
         {
             if (!isRoom(file))
             {
                 ft_putendl("Error: end bad");
+                freemain(file, vals);
                 return (0);
             }
-            a = 1;
+            vals->a = 1;
         }
         if (isRoom(file))
-            room++;
+            vals->room++;
         if (isLink(file))
-            link++;
+            vals->link++;
         if (isAnt(file))
-            ants++;
+            vals->ants++;
         if (isRoom(file))
-            room++;
+            vals->room++;
         if (isStart(file))
-            start++;
+            vals->start++;
         if (isEnd(file))
-            end++;
+            vals->end++;
+        free(file);
     }
-    if (ants != 1)
-    {
-        ft_putendl("Error: No ants found");
-        return (0);
-    }
-    if (room <= 2)
-    {
-        ft_putendl("Error: Not enough rooms");
-        return (0);
-    }
-    if (start != 1)
-    {
-        ft_putendl("Error: No start command");
-        return (0);
-    }
-    if (end != 1)
-    {
-        ft_putendl("Error: wrong end amount");
-        return (0);
-    }
-    if (link < 1)
-    {
-        ft_putendl("Error: too few links");
-        return (0);
-    }
+    if (vals->ants != 1)
+        NO_ANTS;
+    if (vals->room <= 2)
+        NUMROOMS;
+    if (vals->start != 1)
+        NO_START;
+    if (vals->end != 1)
+        NO_END; 
+    if (vals->link < 1)
+        NUMLINKS;
     ft_putendl("all good");
     
+    free(vals);
     return (0);
 }
