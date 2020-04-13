@@ -2,9 +2,9 @@
 
 //validate file
 
-int     isValidType(char *str)
+int     isValidType(char *str, t_staend *staend)
 {
-    if(isAnt(str))
+    if(isAnt(str, staend))
         return (1);
     if(isRoom(str))
         return (1);
@@ -20,6 +20,8 @@ int     isValidType(char *str)
         return(1);
     return(0);
 }
+
+int val_links(){return 0;}
 
 //validate rooms and links
 //validate paths

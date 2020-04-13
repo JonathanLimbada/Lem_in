@@ -15,14 +15,17 @@
 typedef struct          s_room
 {
     char *              name;
-    char *              ant_num;
+    int                 ant;
+    int                 x;
+    int                 y;
+    int                 visited;
     struct s_room *     next;
 }                      t_room;
 
 typedef struct          s_paths
 {
     struct s_room *     path;
-    int                 plen;
+    int                 len;
     struct s_paths *    next;
 }                       t_paths;
 
@@ -37,6 +40,20 @@ typedef struct          s_val
     int     a;
 }                       t_valid;
 
+typedef struct          s_staend
+{
+    t_room  *start;
+    int     sAnts;
+    t_room  *end;
+    int     eAnts;
+}                       t_staend;
+
+typedef struct          s_links
+{
+    t_room  *link;
+    t_links *next;
+}                       t_links;
+
 
 //validation functions
 
@@ -47,13 +64,14 @@ int     isRoom(char* str);
 int     isEnd(char* str);
 int     isComment(char *str);
 int     isCommand(char *str);
-int     isAnt(char* str);
+int     isAnt(char* str, t_staend *staend);
 int     isNum(char* str);
-int     isValidType(char *str);
+int     isValidType(char *str, t_staend *staend);
 void    init_vals(t_valid *vals);
 void    freeroom(char **str);
 void    freelink(char **str);
 void    freemain(char *file, t_valid *vals);
-
+void    checkFile(char *file, t_valid *vals, t_staend *staend, t_paths *paths);
+int     checkFileData(t_valid *vals);
 
 #endif

@@ -32,5 +32,4 @@ char	*ft_strdup(const char *s1)
 	}
 	s2[i] = '\0';
 	return (s2);
-	free(s2);
 }
