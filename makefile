@@ -12,6 +12,8 @@ src/validation/start.c \
 src/validation.c \
 src/init.c \
 src/free.c \
+src/print.c \
+src/algo/map.c \
 		$(LIB)
 
 all: $(MAKELIB) $(LI)

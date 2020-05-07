@@ -38,8 +38,10 @@ int main (void)
     t_paths     *paths;
     t_room      *rooms;
     char        **tmp;
-    t_room      *ptr;
-    t_room      *sptr;
+    t_links     *links;
+
+    int new;
+    new = 0;
 
     vals = (t_valid *)malloc(sizeof(t_valid));
     //start & end info 
@@ -49,6 +51,8 @@ int main (void)
     //all rooms to map paths
     rooms = (t_room *)malloc(sizeof(t_room));
     rooms->next = NULL;
+
+    links = (t_links *)malloc(sizeof(t_links));
 
     init_vals(vals);
 	while (get_next_line(0, &file) != 0)
@@ -74,7 +78,6 @@ int main (void)
             staend->start->x = ft_atoi(tmp[1]);
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
-            //staend->start->next = NULL;
             vals->e = 1;
         }
         //multi start
@@ -113,29 +116,24 @@ int main (void)
             staend->end->y = ft_atoi(tmp[2]);
             vals->a = 1;
         }
+        if (isLink(file))
+        {
+            if (new == 0){
+                add_link(&links, file);
+                new = 1;
+            }else
+                malAdd_link(&links, file);
+            
+        }
         checkFile(file,vals,staend,paths);
         free(file);
     }
-    printf("Ants: %d\n",staend->sAnts);
-    sptr = staend->start;
-    while(sptr->next)
-    {
-        printf("Start name: %s  x: %d y: %d\n",sptr->name,sptr->x,sptr->y);
-        sptr = sptr->next;
-    }
-    // printf("Start name: %s\tx: %d y: %d\n",staend->start->next->name,staend->start->next->x,staend->start->next->y);ft_putchar('\n');
-    printf("End name: %s\tx: %d y: %d\n",staend->end->name,staend->end->x,staend->end->y);
-    // printf("%s\t%d %d", rooms->name, rooms->x, rooms->y);
-    //printf("%s\t%d %d", rooms->next->name, rooms->next->x, rooms->next->y);
-    ptr = rooms;
-    while(ptr)
-    {
-        printf("Room Name: %s\tx: %d y:%d\n", ptr->name, ptr->x, ptr->y);
-        //ft_putstr(ptr->name);
-        ptr = ptr->next;
-    }
+    //check for duplicate links before adding them to the list!!!!!
+    
+    mapLinks(&staend,&rooms,&links);
+    checkFileData(vals);
+    print(staend,rooms,links);
     return (0);
-    //return (checkFileData(vals));
 }
 
 void    checkFile(char *file, t_valid *vals, t_staend *staend, t_paths *paths)

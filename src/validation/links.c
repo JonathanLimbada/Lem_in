@@ -38,3 +38,30 @@ int isLink(char* str)
     freelink(link);
     return (1);
 }
+
+void		add_link(t_links **links, char *line)
+{
+	char	**split;
+
+	split = ft_strsplit(line, '-');
+	(*links)->first = split[0];
+	(*links)->second = split[1];
+    (*links)->next = NULL;
+	free(split);
+}
+
+void    malAdd_link(t_links **links, char *file)
+{
+    t_links    *ptr;
+    char        **tmp;
+
+    ptr = malloc(sizeof(t_links));
+    tmp = ft_strsplit(file, '-');
+
+    ptr->first = tmp[0];
+    ptr->second = tmp[1];
+    free(tmp);
+
+    ptr->next = *links;
+    *links = ptr;
+}
