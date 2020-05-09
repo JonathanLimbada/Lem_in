@@ -28,6 +28,7 @@ int addLink(t_room **rooms, char *find, char *add){
         ptrAdd->next = ptr->links;
         ptr->links = ptrAdd;
     }
+    //add free links func
     return (1);
 }
 
@@ -69,7 +70,7 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
     t_room *sptr;
 
     lptr = *links;
-    while(lptr->next){
+    while(lptr){
         int isStart = 0;
         sptr = (*staend)->start;
         while(sptr->next){
@@ -82,8 +83,19 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
             }
             sptr = sptr->next;
         }
-        if ((addLink(rooms,lptr->first,lptr->second) && !isStart))
-            addLink(rooms,lptr->second,lptr->first);
+        if (!isStart){
+            if (ft_strcmp((*staend)->end->name, lptr->first) == 0 || ft_strcmp((*staend)->end->name, lptr->second) == 0){
+                if (ft_strcmp((*staend)->end->name, lptr->first) == 0){
+                    addLink(rooms,lptr->second,lptr->first);
+                }
+                else{
+                    addLink(rooms,lptr->first,lptr->second);
+                }
+            }
+            else{
+                addLink(rooms,lptr->first,lptr->second);
+                addLink(rooms,lptr->second,lptr->first);
+            }}
         lptr = lptr->next;
     }
 
@@ -106,7 +118,7 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
     t_room *pptr;
     int i = 0;
     pptr = *rooms;
-    while (pptr->next){
+    while (pptr){
         printf("room: %s Links: ", pptr->name);
         if (pptr->links){
             while(pptr->links){
@@ -116,7 +128,6 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
            }
            printf("\n");
         }
-        printf("\n");
         pptr = pptr->next;
     }
     return (0);
