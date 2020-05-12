@@ -26,6 +26,7 @@ typedef struct          s_room
     int                 x;
     int                 y;
     int                 visited;
+    int                 val;
     struct s_room *     links;
     struct s_room *     next;
 }                       t_room;
@@ -53,7 +54,6 @@ typedef struct          s_links
 {
     char            *first;
     char            *second;
-    struct s_links  *alt;
     struct s_links  *next;
 }                       t_links;
 
@@ -80,5 +80,6 @@ void	add_link(t_links **links, char *line);
 void    malAdd_link(t_links **links, char *file);
 void    print(t_staend *staend, t_room *rooms, t_links *links);
 int     mapLinks(t_staend **staend, t_room **rooms, t_links **links);
+int     pathing(t_staend **staend,t_room **rooms, t_paths **paths);
 
 #endif

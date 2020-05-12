@@ -131,8 +131,9 @@ int main (void)
     //check for duplicate links before adding them to the list!!!!!
     
     mapLinks(&staend,&rooms,&links);
-    checkFileData(vals);
-    print(staend,rooms,links);
+    //pathing(&staend,&rooms,&paths);
+    //checkFileData(vals);
+    //print(staend,rooms,links);
     return (0);
 }
 

@@ -35,7 +35,7 @@ int addLink(t_room **rooms, char *find, char *add){
 int addStartLink(t_staend **staend, char *find, char *add){
     t_room *ptr;
     int found = 0;
-
+    if (staend && find && add){
     ptr = (*staend)->start;
     while(ptr){
         if (ft_strcmp(ptr->name, find) == 0){
@@ -58,12 +58,12 @@ int addStartLink(t_staend **staend, char *find, char *add){
             ptrAdd->next = ptr->links;
             ptr->links = ptrAdd;
         }
-    }
+    }}
     return (1);
 
 }
 
-// ORGANISE LINKS FROM START TO END EN SPECIFY IF IT IS A ALT PATH
+// ORGANISE LINKS FROM START TO END AND SPECIFY IF IT IS A ALT PATH
 int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
 {
     t_links *lptr;
@@ -99,7 +99,6 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
         lptr = lptr->next;
     }
 
-    //t_room *sptr;
     sptr = (*staend)->start;
 
     while (sptr->next){
@@ -115,14 +114,18 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
         sptr = sptr->next;
     }
 
-    t_room *pptr;
+   t_room *pptr;
     int i = 0;
+    i++;
     pptr = *rooms;
-    while (pptr){
-        printf("room: %s Links: ", pptr->name);
+    while (pptr->next){
+        ft_putstr("room: ");
+        ft_putstr(pptr->name);
+        ft_putstr(" Links: ");
         if (pptr->links){
             while(pptr->links){
-                printf("%s ", pptr->links->name);
+                ft_putstr(pptr->links->name);
+                ft_putstr(" ");
                 i++;
                 pptr->links = pptr->links->next;
            }
