@@ -1,0 +1,21 @@
+7
+##start
+Start 23 3
+#THIS IS A COMMENT
+Hallway 5 3
+Theatre 9 5
+Passage 10 3
+Bathroom 1 5
+Bedroom 4 8
+Basement 12 2
+##end
+End 10 32
+#ROOM LINKS
+Bathroom-Bedroom
+Hallway-Start
+Hallway-Theatre
+Hallway-Passage
+Hallway-Bedroom
+Hallway-Basement
+Basement-End
+##invalid commands are ignored

@@ -25,6 +25,8 @@ void    rooms_set(t_room **rooms, char **tmp, char *file)
     ptr->name = tmp[0];
     ptr->x = ft_atoi(tmp[1]);
     ptr->y = ft_atoi(tmp[2]);
+    ptr->len = 0;
+    ptr->dist = -1;
 
     ptr->next = *rooms;
     *rooms = ptr;
@@ -87,8 +89,7 @@ int main (void)
                multStart_set(&staend, tmp,file);
             else
                 vals->e = 2;
-        }
-        if (isRoom(file) && vals->e == 2)
+        }else if (isRoom(file) && vals->e == 2)
         {
             tmp = ft_strsplit(file, ' ');
             rooms->name = tmp[0];
@@ -96,12 +97,7 @@ int main (void)
             rooms->y = ft_atoi(tmp[2]);
             rooms->next = NULL;
             vals->e = 3;
-        }
-        else if (isRoom(file) && vals->e == 3 && vals->end != 1)
-        {
-            rooms_set(&rooms, tmp, file);
-        }
-        if (vals->end == 1 && vals->a == 0)
+        } else if (vals->end == 1 && vals->a == 0)
         {
             if (!isRoom(file))
             {
@@ -116,6 +112,10 @@ int main (void)
             staend->end->y = ft_atoi(tmp[2]);
             vals->a = 1;
         }
+        else if (isRoom(file) && (vals->e == 3 || vals->e == 0))
+        {
+            rooms_set(&rooms, tmp, file);
+        }
         if (isLink(file))
         {
             if (new == 0){
@@ -123,15 +123,13 @@ int main (void)
                 new = 1;
             }else
                 malAdd_link(&links, file);
-            
         }
         checkFile(file,vals,staend,paths);
         free(file);
     }
     //check for duplicate links before adding them to the list!!!!!
-    
     mapLinks(&staend,&rooms,&links);
-    //pathing(&staend,&rooms,&paths);
+    pathing(&staend,&rooms,&paths);
     //checkFileData(vals);
     //print(staend,rooms,links);
     return (0);

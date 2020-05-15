@@ -16,82 +16,80 @@ void    addRoomToPath(t_paths **paths, char *room){
     }
 }
 
-int   checkPath(t_room **room, t_paths **paths, t_room **rooms, char *end){
+int checkIfStart(t_staend **staend, char *find, int dist){
+    t_room *ptr;
+    ptr = (*staend)->start;
+
+    while(ptr){
+        if (ft_strcmp(ptr->name, find) == 0){
+            ptr->dist = dist;
+            return (1);
+        }
+        ptr = ptr->next;
+    }
+    return (0);
+}
+
+int   checkPath(t_room *links, t_paths **paths, t_room **rooms, int dist, t_staend **staend){
     int ret;
     ret = 0;
-    t_room *ptr;
+    //t_room *ptr;
     t_room *Rptr;
-
-    if ((*room)){
-    printf("in room %s\n", (*room)->name);
-        ptr = *room;
-        while (ptr){
-            Rptr = *rooms;
-            if (ft_strcmp(end,ptr->name) == 0){
-                ptr->val = 3;
-                addRoomToPath(paths, (*room)->name);
-                printf("found");
+            printf("in ");
+        while (links){
+             Rptr = *rooms;
+            if (checkIfStart(staend,links->name, dist)){
                 return (3);
             }
             while (Rptr){
-                if (ft_strcmp(Rptr->name,ptr->name))
+                if (ft_strcmp(Rptr->name,links->name) == 0)
                     break ;
                 Rptr = Rptr->next;
             }
-            ret = checkPath(&Rptr->links, paths, rooms, end);
-            if (ret == 3){
-                addRoomToPath(paths, (*room)->name);
-                printf("found");
-                return (3);
+            if (Rptr->dist == -1){
+                Rptr->dist = dist;
+                printf("set: %s - dist: %d\n",Rptr->name, dist);
             }
-            ptr = ptr->next;
+            //     printf("\nl: %s\n", links->name);
+            //     prev = links->name;
+            //     if (ft_strcmp(Rptr->links->name,links->name))
+            //         Rptr->links = Rptr->links->next;
+            ret = checkPath(Rptr->links, paths, rooms, dist++, staend);
+            if (ret == 3)
+                return (3);
+            //     if (ret == 3){
+            //         addRoomToPath(paths, links->name);
+            //         printf("found");
+            //         return (3);
+            //     }
+            links = links->next;
         }
-    }
     return (0);
 }
 
 int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
-    t_room *septr; //staend pointer
-    t_room *rptr;
-    t_room *print;
+    t_room *sptr; //staend pointer
+   // t_room *rptr;
+    //t_room *print;
 
-    septr = (*staend)->start;
-    //for each starting room
-    while (septr){
-        rptr = *rooms;
-        while (rptr){
-            if (ft_strcmp(rptr->name, septr->name) == 0)
-                break ;
-            rptr = rptr->next;
-        }
-        printf ("CP: %s\n",rptr->links->name);
-        if (checkPath(&rptr->links, paths, rooms, (*staend)->end->name) == 3)
-            break ;
-        else{
-            printf("No End Found\n");
-            return (1);
-        }
-        septr = septr->next;
+    (*staend)->end->dist = 0;
+    sptr = (*staend)->end;
+        
+    if (checkPath(sptr->links, paths, rooms, 1, staend) == 3){
+        printf("Found path\n");
+    }else{
+        printf("No End Found\n");
+        return (1);
     }
-    print = (*paths)->path;
-        printf("Path: ");
-    while (print){
-        printf("%s ", print->name);
-        print = print->next;
-    }
+    // print = (*paths)->path;
+    // printf("\nPath: ");
+    // while (print){
+    //     printf("%s ", print->name);
+    //     print = print->next;
+    // }
+    // printf("\n");
     return (0);
 }
-
-// char *getNextRoom(t_room **rooms, char *find, char *end){
-//     t_room *rptr;
-
-//     while(rptr){
-//         while(ft_strcmp(rptr->links->name,end) != 0){
-//             rptr->links = rptr->links->next;
-//         }
-//         rptr = rptr->next;
-//     }
-// }
 
 
 

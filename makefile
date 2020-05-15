@@ -14,6 +14,7 @@ src/init.c \
 src/free.c \
 src/print.c \
 src/algo/map.c \
+src/algo/paths.c \
 		$(LIB)
 
 all: $(MAKELIB) $(LI)
@@ -21,7 +22,7 @@ all: $(MAKELIB) $(LI)
 $(MAKELIB):
 	@$(MAKE) $(MAKELIB)
 $(LI):
-		gcc $(FLAGS) $(LISRC) -o $(LI)
+		gcc $(FLAGS) $(LISRC) -o $(LI) -g
 
 clean:
 	rm -fr $(LI)

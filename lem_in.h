@@ -22,11 +22,12 @@ typedef struct          s_paths
 typedef struct          s_room
 {
     char *              name;
-    int                 ant;
+    int                 filled;
     int                 x;
     int                 y;
+    int                 len;
+    int                 dist;
     int                 visited;
-    int                 val;
     struct s_room *     links;
     struct s_room *     next;
 }                       t_room;
