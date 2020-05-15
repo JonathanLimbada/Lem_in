@@ -50,25 +50,16 @@ int   checkPath(t_room *links, t_paths **paths, t_room **rooms, int dist, t_stae
                 Rptr->dist = dist;
                 printf("set: %s - dist: %d\n",Rptr->name, dist);
             }
-            //     printf("\nl: %s\n", links->name);
-            //     prev = links->name;
-            //     if (ft_strcmp(Rptr->links->name,links->name))
-            //         Rptr->links = Rptr->links->next;
             ret = checkPath(Rptr->links, paths, rooms, dist++, staend);
             if (ret == 3)
                 return (3);
-            //     if (ret == 3){
-            //         addRoomToPath(paths, links->name);
-            //         printf("found");
-            //         return (3);
-            //     }
             links = links->next;
         }
     return (0);
 }
 
 int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
-    t_room *sptr; //staend pointer
+    t_room *sptr;
    // t_room *rptr;
     //t_room *print;
 
@@ -90,36 +81,3 @@ int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
     // printf("\n");
     return (0);
 }
-
-
-
-
-//for each starting rooms links
-        // links = septr->links;
-        // while (links){
-        //     lNext = 0;
-        //     // if start link = end
-        //     if (ft_strcmp(links->name,(*staend)->end->name) == 0){
-        //         //end reached, path success
-        //         addRoomToPath(paths, links->name);
-        //         break ;
-        //         // reset all path visited except completed path rooms
-        //     }else{
-        //         addRoomToPath(paths, links->name);
-        //         while(rptr){
-        //             if (ft_strcmp(rptr->name,links->name) == 0)
-        //                 links = rptr->links;
-        //             else
-        //                 rptr = rptr->next;
-        //         }
-        //         links->visited = 1;
-        //         //set room to visited
-        //     }
-        //     if (lNext == 0)
-        //         links = links->next;
-        // }
-        // valPathGetLen(); //count path steps and add to pathlen
-        // if (septr->next){
-        //     malNewPath(); //malloc for new path
-        //     pcount++;
-        // }
