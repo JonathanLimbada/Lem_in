@@ -23,6 +23,9 @@ int checkIfStart(t_staend **staend, char *find, int dist){
     while(ptr){
         if (ft_strcmp(ptr->name, find) == 0){
             ptr->dist = dist;
+            ft_putstr(ptr->name);
+            ft_putstr(" dist set ");
+            ft_putnbr(dist);
             return (1);
         }
         ptr = ptr->next;
@@ -31,30 +34,38 @@ int checkIfStart(t_staend **staend, char *find, int dist){
 }
 
 int   checkPath(t_room *links, t_paths **paths, t_room **rooms, int dist, t_staend **staend){
-    int ret;
-    ret = 0;
+    int ret = 0;
     //t_room *ptr;
     t_room *Rptr;
-            printf("in ");
-        while (links){
-             Rptr = *rooms;
-            if (checkIfStart(staend,links->name, dist)){
-                return (3);
-            }
-            while (Rptr){
-                if (ft_strcmp(Rptr->name,links->name) == 0)
-                    break ;
-                Rptr = Rptr->next;
-            }
-            if (Rptr->dist == -1){
-                Rptr->dist = dist;
-                printf("set: %s - dist: %d\n",Rptr->name, dist);
-            }
-            ret = checkPath(Rptr->links, paths, rooms, dist++, staend);
+    printf("in - ");
+    if (!links){
+        printf("no links");
+    }
+    while (links){
+
+        ft_putstr("link: ");
+        ft_putstr(links->name);
+        ft_putstr("\n");
+        if (checkIfStart(staend,links->name, dist)){
+            return (3);
+        }
+        Rptr = *rooms;
+        while (Rptr){
+           if (ft_strcmp(Rptr->name,links->name) == 0)
+               break ;
+           Rptr = Rptr->next;
+        }
+        printf("rptr: %s ",Rptr->name);
+        ft_putnbr(Rptr->dist);
+        if (Rptr->dist == -1 || Rptr->dist == 0){
+            Rptr->dist = dist;
+            printf("\nset: %s - dist: %d\n",Rptr->name, dist);
+            ret = checkPath(Rptr->links, paths, rooms, dist + 1, staend);
             if (ret == 3)
                 return (3);
-            links = links->next;
         }
+        links = links->next;
+    }
     return (0);
 }
 
