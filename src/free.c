@@ -128,3 +128,16 @@ void    freerooms(t_room **rooms)
     }
     *rooms = NULL;
 }
+
+void	free_time(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i] != NULL)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
