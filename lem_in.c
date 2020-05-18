@@ -13,6 +13,7 @@ void    multStart_set(t_staend **staend, char **tmp, char *file)
 
     ptr->next = (*staend)->start;
     (*staend)->start = ptr;
+    free(tmp);
 }
 
 void    rooms_set(t_room **rooms, char **tmp, char *file)
@@ -25,6 +26,7 @@ void    rooms_set(t_room **rooms, char **tmp, char *file)
     ptr->name = tmp[0];
     ptr->x = ft_atoi(tmp[1]);
     ptr->y = ft_atoi(tmp[2]);
+    free(tmp);
     ptr->len = 0;
     ptr->dist = -1;
 
@@ -85,6 +87,7 @@ int main (void)
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
             vals->e = 2;
+            free(tmp);
         }
         else if (isRoom(file) && vals->e == 2)
         {
@@ -95,6 +98,7 @@ int main (void)
             rooms->dist = -1;
             rooms->next = NULL;
             vals->e = 3;
+            free(tmp);
         } 
         else if (vals->end == 1 && vals->a == 0)
         {
@@ -111,6 +115,7 @@ int main (void)
             staend->end->y = ft_atoi(tmp[2]);
             staend->end->next = NULL;
             vals->a = 1;
+            free(tmp);
         }
         else if (isRoom(file) && (vals->e == 3 || vals->e == 0))
         {
@@ -144,6 +149,10 @@ int main (void)
     freerooms(&rooms);
     freerooms(&staend->start);
     freerooms(&staend->end);
+    freelinks(&links);
+    freecommands(&comment);
+    free(paths);
+    free(tmp);
     return (0);
 }
 
