@@ -144,7 +144,6 @@ int main (void)
     checkFileData(vals);
     //mapLinks(&staend,&rooms,&links);
     //pathing(&staend,&rooms,&paths);
-    ft_putendl(comment->command);
     print(staend,rooms,links, comment);
     freerooms(&rooms);
     freerooms(&staend->start);
