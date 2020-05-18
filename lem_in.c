@@ -59,7 +59,7 @@ int main (void)
     init_vals(vals);
 	while (get_next_line(0, &file) != 0)
     {
-        if (!isValidType(file, staend))
+        if (isValidType(file, staend))
         {
             ft_putendl("oof");
             freemain(file, vals);
