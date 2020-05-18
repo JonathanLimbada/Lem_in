@@ -1,5 +1,4 @@
 17
-##start
 1 23 3
 2 16 7
 #THIS IS A COMMENT
@@ -9,9 +8,7 @@
 #USE GET_NEXT_LINE
 6 1 5
 7 4 8
-##end
 0 9 5
-#ROOM LINKS
 0-4
 0-6
 1-3
