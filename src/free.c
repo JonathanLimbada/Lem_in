@@ -108,8 +108,10 @@ int		pop(t_room **head)
     if ((*head)->links){
         free((*head)->links);
     }
-	free(*head);
-	*head = next_node;
+    if (*head){
+	    free(*head);
+	    *head = next_node;
+    }
     return (0);
 }
 
@@ -120,7 +122,9 @@ void    freerooms(t_room **rooms)
 	//next = *rooms;
     while(*rooms)
     {
-        pop(rooms);
+        if (*rooms){
+            pop(rooms);
+        }
         // free_links(&((*rooms)->links));
         // free((*rooms)->filled);
         // //free((*rooms)->x);

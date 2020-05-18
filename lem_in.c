@@ -13,7 +13,7 @@ void    multStart_set(t_staend **staend, char **tmp, char *file)
 
     ptr->next = (*staend)->start;
     (*staend)->start = ptr;
-    free_time(tmp);
+    //free_time(tmp);
 }
 
 void    rooms_set(t_room **rooms, char **tmp, char *file)
@@ -26,7 +26,7 @@ void    rooms_set(t_room **rooms, char **tmp, char *file)
     ptr->name = tmp[0];
     ptr->x = ft_atoi(tmp[1]);
     ptr->y = ft_atoi(tmp[2]);
-    free_time(tmp);
+    //free_time(tmp);
     ptr->len = 0;
     ptr->dist = -1;
 
@@ -87,7 +87,7 @@ int main (void)
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
             vals->e = 2;
-            freeroom(tmp);
+            //freeroom(tmp);
         }
         else if (isRoom(file) && vals->e == 2)
         {
@@ -98,7 +98,7 @@ int main (void)
             rooms->dist = -1;
             rooms->next = NULL;
             vals->e = 3;
-            freeroom(tmp);
+            //freeroom(tmp);
         } 
         else if (vals->end == 1 && vals->a == 0)
         {
@@ -115,7 +115,7 @@ int main (void)
             staend->end->y = ft_atoi(tmp[2]);
             staend->end->next = NULL;
             vals->a = 1;
-            freelink(tmp);
+            //freelink(tmp);
         }
         else if (isRoom(file) && (vals->e == 3 || vals->e == 0))
         {
@@ -142,14 +142,14 @@ int main (void)
     }
     //check for duplicate links before adding them to the list!!!!!
     if (checkFileData(vals)){
-        freeall(rooms,staend,links,comment,paths,tmp);
+        //freeall(rooms,staend,links,comment,paths,tmp);
         exit(1);
     }
     //mapLinks(&staend,&rooms,&links);
     //pathing(&staend,&rooms,&paths);
     ft_putendl(comment->command);
     print(staend,rooms,links, comment);
-    freeall(rooms,staend,links,comment,paths,tmp);
+    //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }
 
@@ -188,12 +188,29 @@ int checkFileData(t_valid *vals)
 }
 
 void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths, char **tmp){
-    freerooms(&rooms);
-    freerooms(&staend->start);
-    freerooms(&staend->end);
-    free(staend);
-    freelinks(&links);
-    freecommands(&comment);
-    free(paths);
-    freeroom(tmp);
+    
+    if (rooms){
+        freerooms(&rooms);
+    }
+    if (staend->start){
+        freerooms(&staend->start);
+    }
+    if (staend->end){
+        freerooms(&staend->end);
+    }
+    if (staend){
+        free(staend);
+    }
+    if (links){
+        freelinks(&links);
+    }
+    if (comment){
+        freecommands(&comment);
+    }
+    if (paths){
+        free(paths);
+    }
+     if (tmp){
+         freeroom(tmp);
+     }
 }

@@ -62,7 +62,6 @@ void    malAdd_link(t_links **links, char *file)
 
     ptr->first = tmp[0];
     ptr->second = tmp[1];
-    free_time(tmp);
 
     ptr->next = *links;
     *links = ptr;
