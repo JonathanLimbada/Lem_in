@@ -59,7 +59,7 @@ int main (void)
     init_vals(vals);
 	while (get_next_line(0, &file) != 0)
     {
-        if (isValidType(file, staend))
+        if (!isValidType(file, staend))
         {
             ft_putendl("oof");
             freemain(file, vals);
@@ -128,9 +128,9 @@ int main (void)
         free(file);
     }
     //check for duplicate links before adding them to the list!!!!!
+    checkFileData(vals);
     mapLinks(&staend,&rooms,&links);
     pathing(&staend,&rooms,&paths);
-    //checkFileData(vals);
     //print(staend,rooms,links);
     return (0);
 }
