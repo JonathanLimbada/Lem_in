@@ -186,7 +186,6 @@ int checkFileData(t_valid *vals)
         NO_END; 
     if (vals->link < 1)
         NUMLINKS;
-    ft_putendl("all good");
     free(vals);
     return (0);
 }
