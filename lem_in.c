@@ -41,9 +41,12 @@ int main (void)
     t_room      *rooms;
     char        **tmp;
     t_links     *links;
+    t_comments  *comment;
 
     int new;
+    int newcom;
     new = 0;
+    newcom = 0;
 
     vals = (t_valid *)malloc(sizeof(t_valid));
     //start & end info 
@@ -53,6 +56,7 @@ int main (void)
     //all rooms to map paths
     rooms = (t_room *)malloc(sizeof(t_room));
     rooms->next = NULL;
+    comment = (t_comments *)malloc(sizeof(t_comments));
 
     links = (t_links *)malloc(sizeof(t_links));
 
@@ -124,6 +128,14 @@ int main (void)
             }else
                 malAdd_link(&links, file);
         }
+        if (isCommand(file) || isComment(file))
+        {
+            if (newcom == 0){
+                add_comment(&comment, file);
+                newcom = 1;
+            }else
+                malAdd_comment(&comment, file);
+        }
         checkFile(file,vals,staend,paths);
         free(file);
     }
@@ -131,7 +143,8 @@ int main (void)
     checkFileData(vals);
     mapLinks(&staend,&rooms,&links);
     pathing(&staend,&rooms,&paths);
-    //print(staend,rooms,links);
+    ft_putendl(comment->command);
+    print(staend,rooms,links, comment);
     return (0);
 }
 

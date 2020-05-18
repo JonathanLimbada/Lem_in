@@ -19,6 +19,13 @@ typedef struct          s_paths
     struct s_paths *    next;
 }                       t_paths;
 
+typedef struct          s_comments
+{
+    char*               command;
+    struct s_comments*  next;  
+}                       t_comments;
+
+
 typedef struct          s_room
 {
     char *              name;
@@ -80,8 +87,10 @@ void    checkFile(char *file, t_valid *vals, t_staend *staend, t_paths *paths);
 int     checkFileData(t_valid *vals);
 void	add_link(t_links **links, char *line);
 void    malAdd_link(t_links **links, char *file);
-void    print(t_staend *staend, t_room *rooms, t_links *links);
+void    print(t_staend *staend, t_room *rooms, t_links *links, t_comments *comments);
 int     mapLinks(t_staend **staend, t_room **rooms, t_links **links);
 int     pathing(t_staend **staend,t_room **rooms, t_paths **paths);
+void    malAdd_comment(t_comments **comment, char *file);
+void	add_comment(t_comments **comment, char *line);
 
 #endif
