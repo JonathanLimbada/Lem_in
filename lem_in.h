@@ -94,5 +94,7 @@ void    malAdd_comment(t_comments **comment, char *file);
 void	add_comment(t_comments **comment, char *line);
 void    freerooms(t_room **rooms);
 void	free_links(t_links **link);
+void     freelinks(t_links **links);
+void     freecommands(t_comments **comments);
 
 #endif

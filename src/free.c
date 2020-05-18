@@ -36,7 +36,46 @@ void    freemain(char *file, t_valid *vals)
 // 	*link = NULL;
 // }
 
-int		poplinks(t_room *head)
+int		popcomments(t_comments **head)
+{
+	t_comments		*next_node;
+
+	next_node = NULL;
+	if (head == NULL)
+		return (-1);
+	next_node = (*head)->next;
+	free(head);
+	*head = next_node;
+    return (0);
+}
+
+void     freecommands(t_comments **comments){
+    while(*comments){
+        popcomments(comments);
+    }
+}
+
+int		poplinks(t_links **head)
+{
+	t_links		*next_node;
+
+	next_node = NULL;
+	if (*head == NULL)
+		return (-1);
+	next_node = (*head)->next;
+	free(*head);
+	*head = next_node;
+    return (0);
+}
+
+
+void     freelinks(t_links **links){
+    while(*links){
+        poplinks(links);
+    }
+}
+
+int		poplink(t_room *head)
 {
 	t_room		*next_node;
 
@@ -57,7 +96,7 @@ int		pop(t_room **head)
 	if (*head == NULL)
 		return (-1);
     // while ((*head)->links){
-    //     poplinks((*head)->links);
+    //     poplink((*head)->links);
     // }
 	next_node = (*head)->next;
 	free(*head);
