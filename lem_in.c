@@ -84,16 +84,10 @@ int main (void)
             staend->start->x = ft_atoi(tmp[1]);
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
-            vals->e = 1;
+            vals->e = 2;
         }
         //multi start
-        if (vals->e == 1)
-        {
-            if (isRoom(file))
-               multStart_set(&staend, tmp,file);
-            else
-                vals->e = 2;
-        }else if (isRoom(file) && vals->e == 2)
+        else if (isRoom(file) && vals->e == 2)
         {
             tmp = ft_strsplit(file, ' ');
             rooms->name = tmp[0];

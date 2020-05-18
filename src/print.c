@@ -11,7 +11,7 @@ void    print(t_staend *staend, t_room *rooms, t_links *links, t_comments *comme
     ft_putnbr(staend->sAnts);
     ft_putchar('\n');
     sptr = staend->start;
-    while(sptr->next)
+    while(sptr)
     {
         ft_putstr("##start\n");
         ft_putstr(sptr->name);

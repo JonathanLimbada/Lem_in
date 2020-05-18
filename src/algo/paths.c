@@ -37,9 +37,9 @@ int   checkPath(t_room *links, t_paths **paths, t_room **rooms, int dist, t_stae
     int ret = 0;
     //t_room *ptr;
     t_room *Rptr;
-    printf("in - ");
+    ft_putstr("in - ");
     if (!links){
-        printf("no links");
+        ft_putstr("no links");
     }
     while (links){
 
@@ -55,11 +55,16 @@ int   checkPath(t_room *links, t_paths **paths, t_room **rooms, int dist, t_stae
                break ;
            Rptr = Rptr->next;
         }
-        printf("rptr: %s ",Rptr->name);
+        ft_putstr("rptr: ");
+        ft_putstr(Rptr->name);
         ft_putnbr(Rptr->dist);
         if (Rptr->dist == -1 || Rptr->dist == 0){
             Rptr->dist = dist;
-            printf("\nset: %s - dist: %d\n",Rptr->name, dist);
+            ft_putstr("\nset: ");
+            ft_putstr(Rptr->name);
+            ft_putstr(" - dist: ");
+            ft_putnbr(dist);
+            ft_putchar('\n');
             ret = checkPath(Rptr->links, paths, rooms, dist + 1, staend);
             if (ret == 3)
                 return (3);
@@ -78,9 +83,9 @@ int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
     sptr = (*staend)->end;
         
     if (checkPath(sptr->links, paths, rooms, 1, staend) == 3){
-        printf("Found path\n");
+        ft_putendl("Found path");
     }else{
-        printf("No End Found\n");
+        ft_putendl("No End Found");
         return (1);
     }
     // print = (*paths)->path;
