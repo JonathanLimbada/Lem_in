@@ -23,6 +23,8 @@ int isLink(char* str)
     if (strchrnum(str, '-') != 1)
         return (0);
     link = ft_strsplit(str, '-');
+    if (link[0][0] == '#')
+        return(0);
     if (!link[0] || link[0][0] == 'L')
     {
         ft_putendl("Error: bad link format");
