@@ -44,6 +44,7 @@ int		popcomments(t_comments **head)
 	if (head == NULL)
 		return (-1);
 	next_node = (*head)->next;
+    free((*head)->command);
 	free(head);
 	*head = next_node;
     return (0);
@@ -63,6 +64,8 @@ int		poplinks(t_links **head)
 	if (*head == NULL)
 		return (-1);
 	next_node = (*head)->next;
+    free((*head)->first);
+    free((*head)->second);
 	free(*head);
 	*head = next_node;
     return (0);
@@ -99,6 +102,7 @@ int		pop(t_room **head)
     //     poplink((*head)->links);
     // }
 	next_node = (*head)->next;
+    free((*head)->name);
 	free(*head);
 	*head = next_node;
     return (0);
