@@ -147,7 +147,6 @@ int main (void)
     }
     //mapLinks(&staend,&rooms,&links);
     //pathing(&staend,&rooms,&paths);
-    ft_putendl(comment->command);
     print(staend,rooms,links, comment);
     //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
