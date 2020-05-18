@@ -139,6 +139,7 @@ int main (void)
     pathing(&staend,&rooms,&paths);
     ft_putendl(comment->command);
     print(staend,rooms,links, comment);
+    freerooms(rooms);
     return (0);
 }
 

@@ -92,5 +92,7 @@ int     mapLinks(t_staend **staend, t_room **rooms, t_links **links);
 int     pathing(t_staend **staend,t_room **rooms, t_paths **paths);
 void    malAdd_comment(t_comments **comment, char *file);
 void	add_comment(t_comments **comment, char *line);
+void    freerooms(t_room **rooms);
+void	free_links(t_links **link);
 
 #endif
