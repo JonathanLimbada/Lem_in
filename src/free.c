@@ -45,7 +45,7 @@ int		popcomments(t_comments **head)
 		return (-1);
 	next_node = (*head)->next;
     free((*head)->command);
-	free(head);
+	free(*head);
 	*head = next_node;
     return (0);
 }
@@ -102,7 +102,12 @@ int		pop(t_room **head)
     //     poplink((*head)->links);
     // }
 	next_node = (*head)->next;
-    free((*head)->name);
+    if ((*head)->name){
+        free((*head)->name);
+    }
+    if ((*head)->links){
+        free((*head)->links);
+    }
 	free(*head);
 	*head = next_node;
     return (0);
@@ -128,7 +133,6 @@ void    freerooms(t_room **rooms)
     }
     *rooms = NULL;
 }
-
 void	free_time(char **argv)
 {
 	int	i;
