@@ -20,6 +20,7 @@ int addLink(t_room **rooms, char *find, char *add){
     if (!ptr->links){
         ptrAdd = malloc(sizeof(t_room));
         ptrAdd->name = add;
+        ptrAdd->next = NULL;
         ptr->links = ptrAdd;
         ptr->len++;
     }
@@ -52,6 +53,7 @@ int addStartLink(t_staend **staend, char *find, char *add){
         if (!ptr->links){
             ptrAdd = malloc(sizeof(t_room));
             ptrAdd->name = add;
+            ptrAdd->next = NULL;
             ptr->links = ptrAdd;
         }
         else{
@@ -75,6 +77,7 @@ int addEndLink(t_staend **staend, char *add){
         if (!ptr->links){
             ptrAdd = malloc(sizeof(t_room));
             ptrAdd->name = add;
+            ptrAdd->next = NULL;
             ptr->links = ptrAdd;
         }
         else{
