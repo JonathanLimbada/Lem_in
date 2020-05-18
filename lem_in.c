@@ -87,7 +87,7 @@ int main (void)
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
             vals->e = 2;
-            free_time(tmp);
+            freeroom(tmp);
         }
         else if (isRoom(file) && vals->e == 2)
         {
@@ -98,7 +98,7 @@ int main (void)
             rooms->dist = -1;
             rooms->next = NULL;
             vals->e = 3;
-            free_time(tmp);
+            freeroom(tmp);
         } 
         else if (vals->end == 1 && vals->a == 0)
         {
@@ -115,7 +115,7 @@ int main (void)
             staend->end->y = ft_atoi(tmp[2]);
             staend->end->next = NULL;
             vals->a = 1;
-            free_time(tmp);
+            freelink(tmp);
         }
         else if (isRoom(file) && (vals->e == 3 || vals->e == 0))
         {
@@ -141,17 +141,14 @@ int main (void)
         free(file);
     }
     //check for duplicate links before adding them to the list!!!!!
-    checkFileData(vals);
+    if (checkFileData(vals)){
+        freeall(rooms,staend,links,comment,paths,tmp);
+        exit(1);
+    }
     //mapLinks(&staend,&rooms,&links);
     //pathing(&staend,&rooms,&paths);
     print(staend,rooms,links, comment);
-    freerooms(&rooms);
-    freerooms(&staend->start);
-    freerooms(&staend->end);
-    freelinks(&links);
-    freecommands(&comment);
-    free(paths);
-    free_time(tmp);
+    freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }
 
@@ -187,4 +184,15 @@ int checkFileData(t_valid *vals)
         NUMLINKS;
     free(vals);
     return (0);
+}
+
+void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths, char **tmp){
+    freerooms(&rooms);
+    freerooms(&staend->start);
+    freerooms(&staend->end);
+    free(staend);
+    freelinks(&links);
+    freecommands(&comment);
+    free(paths);
+    freeroom(tmp);
 }

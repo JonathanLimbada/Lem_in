@@ -5,11 +5,11 @@
 # include "libft/libft.h"
 # include <stdio.h> //remove
 
-# define NO_ANTS    {ft_putendl("Error: No ants found."); free(vals); exit(1);}
-# define NUMROOMS   {ft_putendl("Error: Not enough rooms."); free(vals); exit(1);}
-# define NO_START   {ft_putendl("Error: No start command."); free(vals); exit(1);}
-# define NUMLINKS   {ft_putendl("Error: Too few links."); free(vals); exit(1);}
-# define NO_END     {ft_putendl("Error: No end command."); free(vals); exit(1);}
+# define NO_ANTS    {ft_putendl("Error: No ants found."); free(vals); return(1);}
+# define NUMROOMS   {ft_putendl("Error: Not enough rooms."); free(vals); return(1);}
+# define NO_START   {ft_putendl("Error: No start command."); free(vals); return(1);}
+# define NUMLINKS   {ft_putendl("Error: Too few links."); free(vals); return(1);}
+# define NO_END     {ft_putendl("Error: No end command."); free(vals); return(1);}
 
 
 typedef struct          s_paths
@@ -97,5 +97,6 @@ void	free_links(t_links **link);
 void     freelinks(t_links **links);
 void	free_time(char **argv);
 void     freecommands(t_comments **comments);
+void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths, char **tmp);
 
 #endif
