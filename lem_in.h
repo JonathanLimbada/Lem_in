@@ -3,6 +3,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
+# include <stdio.h> //remove
 
 # define NO_ANTS    {ft_putendl("Error: No ants found."); free(vals); return(1);}
 # define NUMROOMS   {ft_putendl("Error: Not enough rooms."); free(vals); return(1);}
