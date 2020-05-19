@@ -29,6 +29,7 @@ void    rooms_set(t_room **rooms, char **tmp, char *file)
     //free_time(tmp);
     ptr->len = 0;
     ptr->dist = -1;
+    ptr->links = NULL;
 
     ptr->next = *rooms;
     *rooms = ptr;
@@ -86,6 +87,7 @@ int main (void)
             staend->start->x = ft_atoi(tmp[1]);
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
+            staend->start->links = NULL;
             vals->e = 2;
             //freeroom(tmp);
         }
@@ -97,6 +99,7 @@ int main (void)
             rooms->y = ft_atoi(tmp[2]);
             rooms->dist = -1;
             rooms->next = NULL;
+            rooms->links = NULL;
             vals->e = 3;
             //freeroom(tmp);
         } 
@@ -145,9 +148,9 @@ int main (void)
         //freeall(rooms,staend,links,comment,paths,tmp);
         exit(1);
     }
-    //mapLinks(&staend,&rooms,&links);
-    //pathing(&staend,&rooms,&paths);
-    print(staend,rooms,links, comment);
+    mapLinks(&staend,&rooms,&links);
+    pathing(&staend,&rooms,&paths);
+    //print(staend,rooms,links, comment);
     //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }
