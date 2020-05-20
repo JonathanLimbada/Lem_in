@@ -91,6 +91,18 @@ int main (void)
             vals->e = 2;
             //freeroom(tmp);
         }
+        else if (isRoom(file) && vals->e == 2)
+        {
+            tmp = ft_strsplit(file, ' ');
+            rooms->name = tmp[0];
+            rooms->x = ft_atoi(tmp[1]);
+            rooms->y = ft_atoi(tmp[2]);
+            rooms->dist = -1;
+            rooms->next = NULL;
+            rooms->links = NULL;
+            vals->e = 3;
+            //freeroom(tmp);
+        } 
         else if (vals->end == 1 && vals->a == 0)
         {
             if (!isRoom(file))
@@ -149,8 +161,8 @@ int main (void)
         exit(1);
     }
     mapLinks(&staend,&rooms,&links);
-    pathing(&staend,&rooms,&paths);
-    //print(staend,rooms,links, comment);
+    //pathing(&staend,&rooms,&paths);
+    print(staend,rooms,links, comment);
     //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }

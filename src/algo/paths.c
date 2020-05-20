@@ -69,12 +69,12 @@ int   setDist(t_room *links, t_paths **paths, t_room **rooms, int dist, t_staend
     return (0);
 }
 
-int   getPath(t_room *links, t_staend **staend, t_room **rooms, t_paths **paths, int next, char *start){
+int   getPath(t_room *links,t_staend **staend, t_room **rooms, t_paths **paths, int dist){
     
     t_room *rptr;
     while (links){
         printf("link: %s\n",links->name);
-        if (ft_strcmp(links->name,start) != 0){
+        if (ft_strcmp(links->name,"0") != 0){
         // if (ft_strcmp((*staend)->end->name,links->name)){
         //     addRoomToPath(paths, links->name);
         //     addRoomToPath(paths,(*staend)->end->name);
@@ -87,10 +87,10 @@ int   getPath(t_room *links, t_staend **staend, t_room **rooms, t_paths **paths,
             rptr = rptr->next;
         }
         printf("rptr: %s\n",rptr->name);
-        if (rptr->dist == next && next != 1){
+        if (rptr->dist == dist && dist != 1){
             addRoomToPath(paths, links->name);
             printf("added: %s\n",links->name);
-            getPath(rptr->links,staend,rooms,paths, next - 1, start);
+            getPath(rptr->links,staend,rooms,paths, dist - 1);
         }
         }
         links = links->next;
@@ -125,41 +125,6 @@ int   getPath(t_room *links, t_staend **staend, t_room **rooms, t_paths **paths,
 
     return (0);
 }
-////////////////////NEW////////////////
-// void  queue_add(t_room **queue, t_room **rooms, char *find, int set){
-//     t_room *ptr;
-//     ptr = *rooms;
-
-//     while(ptr){
-//         if (ft_strcmp(ptr->name,find) == 0)
-//             break ;
-//         ptr = ptr->next;
-//     }
-//     t_room *qptr;
-//     qptr = *queue;
-//     while (qptr){
-//         qptr = qptr->next;
-//     }
-//     qptr->next = ptr->links;
-// }
-
-
-    // (*staend)->end->dist = 0;
-    // sptr = (*staend)->end;
-    // links = sptr->links;
-    // while (links){
-    //     queue_add(queue,links->name,dist)
-    //     links = links->next;
-    // }
-    // while (queue){
-    //     if (checkIfStart(staend,queue->name,dist)){
-    //         break ;
-    //     }
-    //     queue_add(queue, rooms, links->name, dist)
-    //     queue_clean(queue,dist);
-    //     queue = queue->next;
-    // }
-    //////////////////NEW////////////////
 
 int addLinks(t_room **rooms, char *find, char *add, t_room *links){
     t_room *ptr;
@@ -199,16 +164,12 @@ int addLinks(t_room **rooms, char *find, char *add, t_room *links){
 
 int   checkRoomDist(char *isSet, t_room **rooms){
     t_room *ptr;
-    ft_putstr("CRD: ");
-    ft_putstr(isSet);
-    ft_putstr("\n");
     ptr = *rooms;
     while(ptr){
         if (ft_strcmp(isSet,ptr->name) == 0)
         break ;
         ptr = ptr->next;
     }
-    ft_putstr(ptr->name);
     if (ptr->dist < 0){
         return (0);
     }
@@ -227,7 +188,6 @@ void    setRoomDist(char *set, t_room **rooms, int dist){
         ptr = ptr->next;
     }
     ptr->dist = dist;
-    printf("set:%s to %d\n",ptr->name,dist);
 }
 
 t_room*    getRoomLinks(t_room *getlinks, char *find, t_room **rooms){
@@ -242,23 +202,17 @@ t_room*    getRoomLinks(t_room *getlinks, char *find, t_room **rooms){
             break ;
         ptr = ptr->next;
     }
-        printf("F:%s, R:%s ",find,ptr->name);
-    printf("\nadded %s's links to getLinks\n",ptr->name);
+    printf("\nadded %s's links\n",ptr->name);
     if (!getlinks){
         ptr2 = ptr->links;
-        printf("p: %s", ptr->links->name);
         return (ptr2);
     }
     ptr2 = getlinks;
-        ft_putstr("printing\n");
     while (ptr2->next){
-        ft_putstr(ptr2->name);
-        ft_putstr(" ");
         ptr2 = ptr2->next;
     }
         ptr2->next = ptr->links;
-    printf("p2: %s", ptr2->name);
-    return (ptr2);
+    return (getlinks);
     // if (!ptr2){
     //     ptr2 = ptr->links;
     //     printf("\ntest: %s\n",ptr2->name);
@@ -301,8 +255,16 @@ int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
         //ft_putstr(setDist->name);
             setRoomDist(setDist->name,rooms,dist);
             getLinks = getRoomLinks(getLinks,setDist->name,rooms);
+            t_room *ptrx;
+            ptrx = getLinks;
+            printf("glinks: ");
+            while (ptrx){
+                printf("%s ",ptrx->name);
+                ptrx = ptrx->next;
+            }
+            printf("\n");
             if (!setDist->next){
-                 dist++;                                 ///check if start is connected to end
+                dist++;                                 ///check if start is connected to end
                 links = getLinks;
                 getLinks = NULL;
                 //printf("links: %s",getLinks->name);
@@ -317,6 +279,14 @@ int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
             if (!checkRoomDist(links->name,rooms)){
                 setRoomDist(links->name,rooms,dist);
                 getLinks = getRoomLinks(getLinks,links->name,rooms);
+                t_room *ptrx;
+            ptrx = getLinks;
+            printf("\nglinks: ");
+            while (ptrx){
+                printf(":%s ",ptrx->name);
+                ptrx = ptrx->next;
+            }
+            printf("\n");
                 if (!links->next){
                     dist++;
                     links = getLinks;
