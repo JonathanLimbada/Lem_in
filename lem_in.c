@@ -57,8 +57,7 @@ int main (void)
     //all valid paths
     paths = (t_paths *)malloc(sizeof(t_paths));
     //all rooms to map paths
-    rooms = (t_room *)malloc(sizeof(t_room));
-    rooms->next = NULL;
+    rooms = NULL;
     comment = (t_comments *)malloc(sizeof(t_comments));
 
     links = (t_links *)malloc(sizeof(t_links));
@@ -71,7 +70,23 @@ int main (void)
             freemain(file, vals);
             return (0);
         }
-        if (vals->start == 1 && vals->e == 0)
+        if (isRoom(file) && vals->e == 0 && rooms != NULL)
+        {
+            rooms_set(&rooms, tmp, file);
+        }
+        if (isRoom(file) && rooms == NULL && vals->e == 0)
+        {
+            rooms = (t_room *)malloc(sizeof(t_room));
+            tmp = ft_strsplit(file, ' ');
+            rooms->name = tmp[0];
+            rooms->x = ft_atoi(tmp[1]);
+            rooms->y = ft_atoi(tmp[2]);
+            rooms->dist = -1;
+            rooms->next = NULL;
+            rooms->links = NULL;
+            //freeroom(tmp);
+        } 
+        if (vals->start == 1 && vals->e == 1)
         {
             if (!isRoom(file))
             {
@@ -87,22 +102,10 @@ int main (void)
             staend->start->y = ft_atoi(tmp[2]);
             staend->start->next = NULL;
             staend->start->links = NULL;
-            vals->e = 2;
+            vals->e = 0;
             //freeroom(tmp);
         }
-        else if (isRoom(file) && vals->e == 2)
-        {
-            tmp = ft_strsplit(file, ' ');
-            rooms->name = tmp[0];
-            rooms->x = ft_atoi(tmp[1]);
-            rooms->y = ft_atoi(tmp[2]);
-            rooms->dist = -1;
-            rooms->next = NULL;
-            rooms->links = NULL;
-            vals->e = 3;
-            //freeroom(tmp);
-        } 
-        else if (vals->end == 1 && vals->a == 0)
+        if (vals->end == 1 && vals->e == 2)
         {
             if (!isRoom(file))
             {
@@ -117,23 +120,8 @@ int main (void)
             staend->end->y = ft_atoi(tmp[2]);
             staend->end->next = NULL;
             vals->a = 1;
+            vals->e = 0;
             //freelink(tmp);
-        }
-        else if (isRoom(file) && vals->e == 2)
-        {
-            tmp = ft_strsplit(file, ' ');
-            rooms->name = tmp[0];
-            rooms->x = ft_atoi(tmp[1]);
-            rooms->y = ft_atoi(tmp[2]);
-            rooms->dist = -1;
-            rooms->next = NULL;
-            rooms->links = NULL;
-            vals->e = 3;
-            //freeroom(tmp);
-        }
-        else if (isRoom(file) && (vals->e == 3 || vals->e == 0))
-        {
-            rooms_set(&rooms, tmp, file);
         }
         if (isLink(file))
         {
@@ -193,7 +181,7 @@ int main (void)
         addEndLinks(&staend,&links,&rooms);
         getPath(staend->start->links,&staend,&rooms,&paths,staend->start->dist - 1);
     }
-    //print(staend,rooms,links, comment);
+    print(staend,rooms,links, comment);
     t_room *print;
     print = paths->path;
     printf("Path: ");
@@ -216,20 +204,22 @@ void    checkFile(char *file, t_valid *vals, t_staend *staend, t_paths *paths)
         vals->link++;
     if (isAnt(file, staend))
         vals->ants++;
-    if (isRoom(file))
-        vals->room++;
     if (isStart(file))
+    {
         vals->start++;
+        vals->e = 1;
+    }
     if (isEnd(file))
+    {
+        vals->e = 2;
         vals->end++;
+    }
 }
 
 int checkFileData(t_valid *vals)
 {
     if (vals->ants != 1)
         NO_ANTS;
-    if (vals->room <= 2)
-        NUMROOMS;
     if (vals->start != 1)
         NO_START;
     if (vals->end != 1)
