@@ -94,9 +94,13 @@ void    malAdd_comment(t_comments **comment, char *file);
 void	add_comment(t_comments **comment, char *line);
 void    freerooms(t_room **rooms);
 void	free_links(t_links **link);
-void     freelinks(t_links **links);
+void    freelinks(t_links **links);
 void	free_time(char **argv);
-void     freecommands(t_comments **comments);
+void    freecommands(t_comments **comments);
 void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths, char **tmp);
+int     getPath(t_room *links,t_staend **staend, t_room **rooms, t_paths **paths, int dist);
+void    addEndLinks(t_staend **staend,t_links **links,t_room **rooms);
+int     addLink(t_room **rooms, char *find, char *add);
+void    addRoomToPath(t_paths **paths, char *room);
 
 #endif

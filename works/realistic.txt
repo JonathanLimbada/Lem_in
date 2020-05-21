@@ -2,8 +2,8 @@
 ##start
 START 0 0
 ##end
-END 20 20
 1 1 1
+END 20 20
 2 2 2
 3 3 3
 4 4 4

@@ -68,7 +68,6 @@ int main (void)
     {
         if (!isValidType(file, staend))
         {
-            ft_putendl("oof");
             freemain(file, vals);
             return (0);
         }
@@ -161,8 +160,48 @@ int main (void)
         exit(1);
     }
     mapLinks(&staend,&rooms,&links);
-    //pathing(&staend,&rooms,&paths);
-    print(staend,rooms,links, comment);
+    t_room *sptr;
+    int x;
+    if (!staend->start->links){
+        sptr = staend->end->links;
+        x = 0;
+    }
+    else{
+        sptr = staend->start->links;
+        x = 1;
+    }
+    while (sptr){
+        if (x == 0){
+            if (ft_strcmp(sptr->name,staend->start->name) == 0){
+                addRoomToPath(&paths, staend->end->name);
+                x = 3;
+                break;
+            }
+            sptr = sptr->next;
+        }else{
+            if (ft_strcmp(sptr->name,staend->end->name) == 0){
+                addRoomToPath(&paths, staend->end->name);
+                x = 3;
+                break;
+            }
+            sptr = sptr->next;
+        }
+    }
+    if (x != 3){
+        pathing(&staend,&rooms,&paths);
+    //printf("slink: %s\n", staend->start->links->name);
+        addEndLinks(&staend,&links,&rooms);
+        getPath(staend->start->links,&staend,&rooms,&paths,staend->start->dist - 1);
+    }
+    //print(staend,rooms,links, comment);
+    t_room *print;
+    print = paths->path;
+    printf("Path: ");
+    while (print){
+        printf("%s ", print->name);
+        print = print->next;
+    }
+    printf("\n");
     //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }
@@ -227,4 +266,20 @@ void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *commen
      if (tmp){
          freeroom(tmp);
      }
+}
+
+void    addEndLinks(t_staend **staend,t_links **links,t_room **rooms){
+    t_links *lptr;
+    lptr = *links;
+    while (lptr){
+    if (ft_strcmp((*staend)->end->name, lptr->first) == 0 || ft_strcmp((*staend)->end->name, lptr->second) == 0){
+                if (ft_strcmp((*staend)->end->name, lptr->first) == 0){
+                    addLink(rooms,lptr->second,lptr->first);
+                }
+                else if (ft_strcmp((*staend)->end->name,lptr->second) == 0){
+                    addLink(rooms,lptr->first,lptr->second);
+                }
+            }
+            lptr = lptr->next;
+    }
 }

@@ -37,17 +37,16 @@ int addLink(t_room **rooms, char *find, char *add){
 
 int addStartLink(t_staend **staend, char *find, char *add){
     t_room *ptr;
-    int found = 0;
-    if (staend && find && add){
+    if (find){}
     ptr = (*staend)->start;
-    while(ptr){
-        if (ft_strcmp(ptr->name, find) == 0){
-            found = 1;
-            break;
-        }
-        ptr = ptr->next;
-    }
-    if (found){
+    // while(ptr){
+    //     if (ft_strcmp(ptr->name, find) == 0){
+    //         found = 1;
+    //         break;
+    //     }
+    //     ptr = ptr->next;
+    // }
+    // if (found){
         t_room *ptrAdd;
 
         if (!ptr->links){
@@ -62,7 +61,6 @@ int addStartLink(t_staend **staend, char *find, char *add){
             ptrAdd->next = ptr->links;
             ptr->links = ptrAdd;
         }
-    }}
     return (1);
 
 }
@@ -100,17 +98,14 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
     while(lptr){
         int isStart = 0;
         sptr = (*staend)->start;
-        while(sptr->next){
-            if (ft_strcmp(sptr->name, lptr->first) == 0){
-                addStartLink(staend, lptr->first, lptr->second);
-                addLink(rooms,lptr->second,lptr->first);
-                isStart++;
-            }else if (ft_strcmp(sptr->name, lptr->second) == 0){
-                addStartLink(staend, lptr->second, lptr->first);
-                addLink(rooms,lptr->first,lptr->second);
-                isStart++;
-            }
-            sptr = sptr->next;
+        if (ft_strcmp(sptr->name, lptr->first) == 0){
+            addStartLink(staend, lptr->first, lptr->second);
+            addLink(rooms,lptr->second,lptr->first);
+            isStart++;
+        }else if (ft_strcmp(sptr->name, lptr->second) == 0){
+            addStartLink(staend, lptr->second, lptr->first);
+            addLink(rooms,lptr->first,lptr->second);
+            isStart++;
         }
         if (!isStart){
             if (ft_strcmp((*staend)->end->name, lptr->first) == 0 || ft_strcmp((*staend)->end->name, lptr->second) == 0){
@@ -131,8 +126,6 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
     }
 
     // sptr = (*staend)->start;
-
-    // while (sptr->next){
     //     printf("Start room: %s Links: ", sptr->name);
     //     if (sptr->links){
     //         while(sptr->links){
@@ -140,9 +133,6 @@ int mapLinks(t_staend **staend, t_room **rooms, t_links **links)
     //             sptr->links = sptr->links->next;
     //        }
     //        printf("\n");
-    //     }
-    //     printf("\n");
-    //     sptr = sptr->next;
     // }
 
     // t_room *eptr = (*staend)->end;
