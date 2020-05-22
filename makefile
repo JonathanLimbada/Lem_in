@@ -15,6 +15,7 @@ src/free.c \
 src/print.c \
 src/algo/map.c \
 src/algo/paths.c \
+src/algo/ants.c \
 		$(LIB)
 
 all: $(MAKELIB) $(LI)

@@ -8,12 +8,14 @@ void    addRoomToPath(t_paths **paths, char *room){
     if (!(*paths)->path){
         ptr = malloc(sizeof(t_room));
         ptr->name = room;
+        ptr->filled = 0;
         ptr->next = NULL;
         (*paths)->path = ptr;
     }
     else{
         ptr = malloc(sizeof(t_room));
         ptr->name = room;
+        ptr->filled = 0;
         ptr->next = NULL;
         while(ptr2->next != NULL){
             ptr2 = ptr2->next;

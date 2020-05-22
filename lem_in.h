@@ -17,6 +17,7 @@ typedef struct          s_paths
     struct s_room *     path;
     int                 len;
     struct s_paths *    next;
+    int         done;
 }                       t_paths;
 
 typedef struct          s_comments
@@ -102,5 +103,6 @@ int     getPath(t_room *links,t_staend **staend, t_room **rooms, t_paths **paths
 void    addEndLinks(t_staend **staend,t_links **links,t_room **rooms);
 int     addLink(t_room **rooms, char *find, char *add);
 void    addRoomToPath(t_paths **paths, char *room);
+void    antMovements(t_paths **path, t_staend **staend);
 
 #endif

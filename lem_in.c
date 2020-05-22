@@ -56,6 +56,7 @@ int main (void)
     staend = (t_staend *)malloc(sizeof(t_staend));
     //all valid paths
     paths = (t_paths *)malloc(sizeof(t_paths));
+    paths->done = 0;
     //all rooms to map paths
     rooms = NULL;
     comment = (t_comments *)malloc(sizeof(t_comments));
@@ -182,6 +183,9 @@ int main (void)
         getPath(staend->start->links,&staend,&rooms,&paths,staend->start->dist - 1);
     }
     print(staend,rooms,links, comment);
+
+    ///////////remove with all printf and header in .h file/////////////
+    ft_putstr("\n");
     t_room *print;
     print = paths->path;
     printf("Path: ");
@@ -190,6 +194,8 @@ int main (void)
         print = print->next;
     }
     printf("\n");
+    ///////////////////////////////////////////////////////////////////
+    antMovements(&paths,&staend);
     //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }
