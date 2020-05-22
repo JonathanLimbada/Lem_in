@@ -195,7 +195,10 @@ int main (void)
     }
     printf("\n");
     ///////////////////////////////////////////////////////////////////
-    antMovements(&paths,&staend);
+    if (paths->path->next == NULL)
+        spAntMovements(&paths,&staend);
+    else
+        antMovements(&paths,&staend);
     //freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }

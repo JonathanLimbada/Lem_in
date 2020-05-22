@@ -104,5 +104,6 @@ void    addEndLinks(t_staend **staend,t_links **links,t_room **rooms);
 int     addLink(t_room **rooms, char *find, char *add);
 void    addRoomToPath(t_paths **paths, char *room);
 void    antMovements(t_paths **path, t_staend **staend);
+void    spAntMovements(t_paths **path, t_staend **staend);
 
 #endif

@@ -8,36 +8,6 @@ void    printMove(char *name, int ant){
     ft_putchar(' ');
 }
 
-// int     moveAnt(t_paths **path, t_staend **staend, int move, int ant, char *first){
-//     t_room *ptr;
-//     t_room *prev;
-//     ptr = (*path)->path;
-//     int x = move;
-//     while (x != 0){
-//         if (!ptr->next)
-//             break ;
-//         prev = ptr;
-//         ptr = ptr->next;
-//         x--;
-//     }
-//     if (ft_strcmp(first,ptr->name) == 0 && ptr->filled == 0){
-//         ptr->filled = ant;
-//         printMove(ptr->name,ptr->filled);
-//         return (1);
-//     }
-//     else if (ft_strcmp((*staend)->end->name,ptr->name) == 0 && ptr->filled != 0){
-//         printMove(prev->name,prev->filled);
-//         prev->filled = 0;
-//         return (-1);
-//     }
-//     else {
-//         printMove(ptr->next->name,ptr->filled);
-//         ptr->next->filled = ptr->filled;
-//         ptr->filled = 0;
-//         return (0);
-//     }
-// }
-
 int moveAnt(t_paths **paths, t_staend **staend, int ant){
     if (staend){}
     t_room *prev;
@@ -56,7 +26,6 @@ int moveAnt(t_paths **paths, t_staend **staend, int ant){
         while (prev->next){
             prev = prev->next;
         }
-    // ft_putstr(prev->name);
     prev1 = prev;
     ptr = (*paths)->path;
     while (ptr){
@@ -66,16 +35,11 @@ int moveAnt(t_paths **paths, t_staend **staend, int ant){
                 break;
             }
             if (ft_strcmp(ptr1->next->name,prev->name) == 0){
-                //ft_putstr(prev->name);
                 break;
             }
             ptr1 = ptr1->next;
         }
         if (ft_strcmp(ptr1->next->name,(*staend)->end->name) == 0){
-            //printf("%s-%d\n",ptr1->name,ptr1->filled);
-            // ft_putstr(ptr1->name);
-            // ft_putstr(" - ");
-            // ft_putnbr(ptr1->filled);
             if (ptr1->filled != 0){
                 printMove(ptr1->next->name,ptr1->filled);
                 if (ptr1->filled == (*staend)->sAnts){
@@ -115,26 +79,6 @@ int moveAnt(t_paths **paths, t_staend **staend, int ant){
 }
 
 void    antMovements(t_paths **path, t_staend **staend){
-    // int moves = 1;
-    // int ret = 0;
-    // int move = 0;
-    // int ant = 1;
-    // char *first = (*path)->path->name;
-    // while (ant <= (*staend)->sAnts){
-    //     move = moves;
-    //     while (move != 0){
-    //         //ft_putnbr(move);
-    //         ret = moveAnt(path,staend, move - 1, ant,first);
-    //         ft_putchar(' ');
-    //         if (ret == 1){
-    //             moves++;
-    //             ant++;
-    //         }else if (ret == -1){
-    //             moves -= 1;
-    //         }
-    //             move--;
-    //     }
-    // }
     int ret = 1;
     int ant = 1;
     while (ret != 0){
@@ -142,5 +86,14 @@ void    antMovements(t_paths **path, t_staend **staend){
         if (ant != (*staend)->sAnts)
             ant++;
         ft_putstr("\n");
+    }
+}
+
+void    spAntMovements(t_paths **path, t_staend **staend){
+    int ant = 1;
+    while (ant != (*staend)->sAnts + 1){
+        printMove((*path)->path->name,ant);
+        ft_putchar('\n');
+        ant++;
     }
 }
