@@ -21,8 +21,6 @@ void    addRoomToPath(t_paths **paths, char *room){
             ptr2 = ptr2->next;
         }
         ptr2->next = ptr;
-        // ptr->next = (*paths)->path;
-        // (*paths)->path = ptr;
     }
 }
 
@@ -189,7 +187,7 @@ int   pathing(t_staend **staend, t_room **rooms, t_paths **paths){
             setRoomDist(setDist->name,rooms,dist);
             getLinks = getRoomLinks(getLinks,setDist->name,rooms);
             if (!setDist->next){
-                dist++;                                 ///check if start is connected to end
+                dist++;
                 links = getLinks;
                 getLinks = NULL;
              }

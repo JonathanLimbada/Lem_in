@@ -199,7 +199,7 @@ int main (void)
         spAntMovements(&paths,&staend);
     else
         antMovements(&paths,&staend);
-    //freeall(rooms,staend,links,comment,paths,tmp);
+    freeall(rooms,staend,links,comment,paths,tmp);
     return (0);
 }
 
@@ -213,13 +213,11 @@ void    checkFile(char *file, t_valid *vals, t_staend *staend, t_paths *paths)
         vals->link++;
     if (isAnt(file, staend))
         vals->ants++;
-    if (isStart(file))
-    {
+    if (isStart(file)){
         vals->start++;
         vals->e = 1;
     }
-    if (isEnd(file))
-    {
+    if (isEnd(file)){
         vals->e = 2;
         vals->end++;
     }
@@ -232,7 +230,7 @@ int checkFileData(t_valid *vals)
     if (vals->start != 1)
         NO_START;
     if (vals->end != 1)
-        NO_END; 
+        NO_END;
     if (vals->link < 1)
         NUMLINKS;
     free(vals);
@@ -240,7 +238,6 @@ int checkFileData(t_valid *vals)
 }
 
 void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths, char **tmp){
-    
     if (rooms){
         freerooms(&rooms);
     }
@@ -265,20 +262,4 @@ void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *commen
      if (tmp){
          freeroom(tmp);
      }
-}
-
-void    addEndLinks(t_staend **staend,t_links **links,t_room **rooms){
-    t_links *lptr;
-    lptr = *links;
-    while (lptr){
-    if (ft_strcmp((*staend)->end->name, lptr->first) == 0 || ft_strcmp((*staend)->end->name, lptr->second) == 0){
-                if (ft_strcmp((*staend)->end->name, lptr->first) == 0){
-                    addLink(rooms,lptr->second,lptr->first);
-                }
-                else if (ft_strcmp((*staend)->end->name,lptr->second) == 0){
-                    addLink(rooms,lptr->first,lptr->second);
-                }
-            }
-            lptr = lptr->next;
-    }
 }

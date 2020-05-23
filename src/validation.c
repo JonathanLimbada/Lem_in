@@ -20,8 +20,3 @@ int     isValidType(char *str, t_staend *staend)
         return(1);
     return(0);
 }
-
-int val_links(){return 0;}
-
-//validate rooms and links
-//validate paths

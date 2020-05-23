@@ -1,7 +1,6 @@
 #include "../lem_in.h"
 
-//malloc
-//initialize variables and structures.
+//initialize variables
 void    init_vals(t_valid *vals)
 {
     vals->ants = 0;
