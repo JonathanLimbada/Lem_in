@@ -199,7 +199,7 @@ int main (void)
         spAntMovements(&paths,&staend);
     else
         antMovements(&paths,&staend);
-    freeall(rooms,staend,links,comment,paths,tmp);
+    freeall(rooms,staend,links,comment,paths);
     return (0);
 }
 
@@ -237,7 +237,7 @@ int checkFileData(t_valid *vals)
     return (0);
 }
 
-void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths, char **tmp){
+void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *comment,t_paths *paths){
     if (rooms){
         freerooms(&rooms);
     }
@@ -259,7 +259,4 @@ void    freeall(t_room *rooms,t_staend *staend,t_links *links,t_comments *commen
     if (paths){
         free(paths);
     }
-     if (tmp){
-         freeroom(tmp);
-     }
 }

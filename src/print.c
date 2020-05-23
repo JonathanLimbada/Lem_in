@@ -48,7 +48,7 @@ void    print(t_staend *staend, t_room *rooms, t_links *links, t_comments *comme
             ft_putchar('-');
             ft_putstr(ptr2->second);
             ft_putchar('\n');
-            ptr2 = ptr2->next; 
+            ptr2 = ptr2->next;
         }
     }
     if (comments){
