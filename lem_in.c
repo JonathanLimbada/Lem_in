@@ -143,7 +143,9 @@ int main (void)
         checkFile(file,vals,staend,paths);
         free(file);
     }
-    //check for duplicate links before adding them to the list!!!!!
+    if (staend->sAnts == 0){
+        NO_ANTS;
+    }
     if (checkFileData(vals)){
         //freeall(rooms,staend,links,comment,paths,tmp);
         exit(1);
@@ -178,23 +180,11 @@ int main (void)
     }
     if (x != 3){
         pathing(&staend,&rooms,&paths);
-    //printf("slink: %s\n", staend->start->links->name);
         addEndLinks(&staend,&links,&rooms);
         getPath(staend->start->links,&staend,&rooms,&paths,staend->start->dist - 1);
     }
     print(staend,rooms,links, comment);
-
-    ///////////remove with all printf and header in .h file/////////////
-    ft_putstr("\n");
-    t_room *print;
-    print = paths->path;
-    printf("Path: ");
-    while (print){
-        printf("%s ", print->name);
-        print = print->next;
-    }
-    printf("\n");
-    ///////////////////////////////////////////////////////////////////
+    ft_putchar('\n');
     if (paths->path->next == NULL)
         spAntMovements(&paths,&staend);
     else

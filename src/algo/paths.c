@@ -60,7 +60,7 @@ int   getPath(t_room *links,t_staend **staend, t_room **rooms, t_paths **paths, 
                         }
                         ptr = ptr->next;
                     }
-                    if (ptr->dist == dist){
+                    if (ptr != NULL && ptr->dist == dist){
                         addRoomToPath(paths, ptr->name);
                         dist--;
                         links = ptr->links;
@@ -115,7 +115,7 @@ int   checkRoomDist(char *isSet, t_room **rooms){
     ptr = *rooms;
     while(ptr){
         if (ft_strcmp(isSet,ptr->name) == 0)
-        break ;
+            break ;
         ptr = ptr->next;
     }
     if (ptr){
@@ -130,13 +130,12 @@ void    setRoomDist(char *set, t_room **rooms, int dist){
 
     ptr = *rooms;
     while(ptr){
-        if (set && ptr->name){
-            if (ft_strcmp(set,ptr->name) == 0)
-              break ;
-        }
+        if (ft_strcmp(set,ptr->name) == 0)
+            break ;
         ptr = ptr->next;
     }
-    ptr->dist = dist;
+    if (ptr != NULL)
+        ptr->dist = dist;
 }
 
 t_room*    getRoomLinks(t_room *getlinks, char *find, t_room **rooms){
@@ -145,20 +144,23 @@ t_room*    getRoomLinks(t_room *getlinks, char *find, t_room **rooms){
     ptr2 = malloc(sizeof(getlinks));
 
     ptr = *rooms;
-    while(ptr->next){
+    while(ptr != NULL){
         if (ft_strcmp(find,ptr->name) == 0)
             break ;
         ptr = ptr->next;
     }
-    if (!getlinks){
+    if (!getlinks && ptr != NULL){
         ptr2 = ptr->links;
         return (ptr2);
     }
     ptr2 = getlinks;
+    if (ptr2){
     while (ptr2->next){
         ptr2 = ptr2->next;
     }
+    if (ptr2 != NULL && ptr != NULL)
         ptr2->next = ptr->links;
+    }
     return (getlinks);
 }
 

@@ -17,7 +17,7 @@ int isNum(char* str)
 int isAnt(char* str, t_staend *staend)
 {
     if (isNum(str))
-    {
+    {   
         staend->sAnts = ft_atoi(str);
         return (1);
     }
