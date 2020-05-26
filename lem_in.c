@@ -91,7 +91,7 @@ int main (void)
         {
             if (!isRoom(file))
             {
-                ft_putendl("Error: start bad");
+                ft_putendl("Error: No Start Room");
                 freemain(file, vals);
                 return (0);
             }
@@ -110,7 +110,7 @@ int main (void)
         {
             if (!isRoom(file))
             {
-                ft_putendl("Error: end bad");
+                ft_putendl("Error: No End Room");
                 freemain(file, vals);
                 return (0);
             }
